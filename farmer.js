@@ -2,14 +2,16 @@ const { Vec3 } = require('vec3')
 const mineflayer = require('mineflayer')
 const { pathfinder, Movements, goals } = require('mineflayer-pathfinder')
 
-if (process.argv.length < 4 || process.argv.length > 4) {
-	console.log('Usage : node <...>.js <host> <name>');
-	process.exit(1);
+if (process.argv.length < 4 || process.argv.length > 6) {
+	console.log('Usage : node farmer.js <host> <port> [<name>] [<password>]')
+	process.exit(1)
 }
 
 const bot = mineflayer.createBot({
 	host: process.argv[2],
-	username: process.argv[3]
+	port: parseInt(process.argv[3]),
+	username: process.argv[4] ? process.argv[4] : 'farmer',
+	password: process.argv[5]
 })
 
 bot.loadPlugin(pathfinder);
@@ -119,7 +121,7 @@ async function loop(){
 			}else{
 				const toHarvest = await blockToHarvest();
 				const toSow = bot.blockAt(toHarvest.position.offset(0,-1, 0));
-				await bot.equip(801,'hand');
+				await bot.equip(801,'hand').catch(()=>{console.log('装备工具失败')});
 				await bot.pathfinder.goto(new goals.GoalBlock(toHarvest.position.x, toHarvest.position.y, toHarvest.position.z));
 				await bot.dig(toHarvest);
 				const picked = await new Promise((resolve,reject)=>{

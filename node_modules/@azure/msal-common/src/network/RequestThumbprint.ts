@@ -3,7 +3,8 @@
  * Licensed under the MIT License.
  */
 
-import { AuthenticationScheme } from "../utils/Constants";
+import { ShrOptions } from "../crypto/SignedHttpRequest.js";
+import { AuthenticationScheme } from "../utils/Constants.js";
 
 /**
  * Type representing a unique request thumbprint.
@@ -19,4 +20,5 @@ export type RequestThumbprint = {
     resourceRequestUri?: string;
     shrClaims?: string;
     sshKid?: string;
+    shrOptions?: ShrOptions;
 };

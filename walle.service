@@ -1,0 +1,14 @@
+[Unit]
+Description=walle bot
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -s /bin/bash -dm -S walle /bin/bash /home/wwjjack/mineflayer/walle.sh
+ExecStop=/usr/bin/screen -S walle -X stuff ^c
+KillMode=none
+WorkingDirectory=/home/wwjjack/mineflayer
+Restart=on-failure
+User=wwjjack
+
+[Install]
+WantedBy=multi-user.target

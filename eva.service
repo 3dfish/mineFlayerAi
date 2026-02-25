@@ -1,0 +1,14 @@
+[Unit]
+Description=eva bot
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -s /bin/bash -dm -S eva /bin/bash /home/wwjjack/mineflayer/eva.sh
+ExecStop=/usr/bin/screen -S eva -X stuff ^c
+KillMode=none
+WorkingDirectory=/home/wwjjack/mineflayer
+Restart=on-failure
+User=wwjjack
+
+[Install]
+WantedBy=multi-user.target
