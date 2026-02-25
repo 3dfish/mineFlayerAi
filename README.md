@@ -1,1 +1,1 @@
-欢迎使用mineflayerAi
+欢迎使用mineFlayerAi
